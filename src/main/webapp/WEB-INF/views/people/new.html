@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New entry</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+    <label for="reason">Причина отсутствия</label>
+    <input type="text" th:field="*{reason}" id="reason"/>
+    <div style="color:red" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}">Reason Error</div>
+    <br/>
+    <label for="start_date">Дата начала</label>
+    <input type="text" th:field="*{start_date}" id="start_date"/>
+    <div style="color:red" th:if="${#fields.hasErrors('start_date')}" th:errors="*{start_date}">Start_date Error</div>
+    <br/>
+    <label for="duration">Продолжительность (раб. дней)</label>
+    <input type="text" th:field="*{duration}" id="duration"/>
+    <div style="color:red" th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration Error</div>
+    <br/>
+    <label for="discounted">Учтено при оплате</label>
+    <input type="text" th:field="*{discounted}" id="discounted"/>
+    <div style="color:red" th:if="${#fields.hasErrors('discounted')}" th:errors="*{discounted}">Discounted Error</div>
+    <br/>
+    <label for="description">Комментарий</label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
+    <br/>
+    <input type="submit" value="Создать запись"/>
+</form>
+
+</body>
+</html>
