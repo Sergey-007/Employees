@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Absence journal</title>
+    <title>Учет отсутствия</title>
 </head>
 <body>
-
-<div th:each="person : ${people}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getId()}">user</a>
-    <a th:text="${person.getReason()}">user</a>
-    <a th:text="${person.getStart_date()}">user</a>
-    <a th:text="${person.getDuration()}">user</a>
-    <a th:text="${person.isDiscounted()}">user</a>
-    <a th:text="${person.getDescription()}">user</a>
-
+<div th:switch="${people}">
+    <h2 th:case="null">Записи отсутствуют</h2>
+    <div th:case="*">
+        <h2>Учет отсутствия сотрудников на рабочем месте</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Идентификатор</th>
+                <th>Причина отсутствия</th>
+                <th>Дата начала</th>
+                <th width="100">Продолжительность (раб. дней)</th>
+                <th>Учтено при оплате</th>
+                <th>Комментарий</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person : ${people}">
+                <td th:text="${person.getId()}"></td>
+                <td th:text="${person.getReason()}"></td>
+                <td th:text="${person.getStart_date()}"></td>
+                <td th:text="${person.getDuration()}"></td>
+                <td th:text="${person.isDiscounted()}"></td>
+                <td th:text="${person.getDescription()}"></td>
+                <td><a th:href="@{/people/edit/{id}(id=${person.getId()})}">Редактировать</a></td>
+                <td><form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+                    <input type="submit" value="Удалить"/>
+                </form></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/people/new">Новая запись</a></p>
 </div>
 
 <br/>
 <hr/>
-<a href="/people/new">Создать новую запись</a>
-
 </body>
 </html>

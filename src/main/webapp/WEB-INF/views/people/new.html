@@ -27,8 +27,11 @@
     <input type="text" th:field="*{description}" id="description"/>
     <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
     <br/>
+    <br/>
     <input type="submit" value="Создать запись"/>
 </form>
-
+<br/>
+<hr/>
+<p><a href="/people">Отменить изменения</a></p>
 </body>
 </html>
