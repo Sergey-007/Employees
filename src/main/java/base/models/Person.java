@@ -9,18 +9,14 @@ import java.util.Date;
 public class Person {
     private int id;
 
-    //@NotEmpty(message = "Reason should not be empty, 'Отпуск', 'Больничный', 'Прогул'")
     private int reason;
 
-    //@NotEmpty(message = "Chose from calendar")
     @DateTimeFormat(pattern = "dd.MM.yy")
     private Date start_date;
 
-    //@NotEmpty(message = "Duration could not be empty")
     @Min(value = 1, message = "Enter the number")
     private int duration;
 
-    //@NotEmpty(message = "Duration could not be empty")
     private boolean discounted;
 
     @Size(max = 1024)
